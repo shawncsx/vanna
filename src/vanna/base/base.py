@@ -78,7 +78,7 @@ class VannaBase(ABC):
         self.run_sql_is_set = False
         self.static_documentation = ""
         self.dialect = self.config.get("dialect", "SQL")
-        self.language = self.config.get("language", None)
+        self.language = self.config.get("language", None)     #用在prompt中，提示LLM用什么语言返回
         self.max_tokens = self.config.get("max_tokens", 14000)
 
     def log(self, message: str, title: str = "Info"):

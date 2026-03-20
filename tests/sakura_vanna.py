@@ -30,29 +30,29 @@ from vanna.vannadb.vannadb_vector import VannaDB_VectorStore
 
 
 from vanna.chromadb.chromadb_vector import ChromaDB_VectorStore
-from vanna.openai.openai_chat import OpenAI_Chat
-from openai import OpenAI
+# from vanna.openai.openai_chat import OpenAI_Chat
+# from openai import OpenAI
 
-api_key = "sk-10ac90a6267a46ad83df797d65520494"
-client = OpenAI(
-    api_key=api_key,
-    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
-)
-completion = client.chat.completions.create(
-    model="qwen-plus",
-    messages=[{'role': 'user', 'content': '你是谁？'}]
-)
-print(completion.choices[0].message.content)
+# api_key = "sk-10ac90a6267a46ad83df797d65520494"
+# client = OpenAI(
+#     api_key=api_key,
+#     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+# )
+# completion = client.chat.completions.create(
+#     model="qwen-plus",
+#     messages=[{'role': 'user', 'content': '你是谁？'}]
+# )
+# print(completion.choices[0].message.content)
 
+from vanna.qianwen.QianwenAI_chat import QianWenAI_Chat
 
-class MyVanna(ChromaDB_VectorStore, OpenAI_Chat):
+class MyVanna(ChromaDB_VectorStore, QianWenAI_Chat):
     def __init__(self, config=None):
         ChromaDB_VectorStore.__init__(self, config=config)
         OpenAI_Chat.__init__(self, config=config)
 
 config = {
-    "path": "./tests/chroma_db", #向量数据库存储路径
-    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",  # 阿里云百炼平台模型
+    "path": "./db/chroma_db", #向量数据库存储路径
     "api_key": "sk-10ac90a6267a46ad83df797d65520494",
     "model": "qwen-plus",  # 阿里云百炼平台模型
     "options": {"temperature": 0.3}  # 控制生成随机性
