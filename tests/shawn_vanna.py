@@ -44,14 +44,13 @@ completion = client.chat.completions.create(
 )
 print(completion.choices[0].message.content)
 
-
 class MyVanna(ChromaDB_VectorStore, OpenAI_Chat):
     def __init__(self, config=None):
         ChromaDB_VectorStore.__init__(self, config=config)
         OpenAI_Chat.__init__(self, config=config)
 
 config = {
-    "path": "./tests/chroma_db", #向量数据库存储路径
+    "path": "./data/chroma_db", #向量数据库存储路径
     "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",  # 阿里云百炼平台模型
     "api_key": "sk-10ac90a6267a46ad83df797d65520494",
     "model": "qwen-plus",  # 阿里云百炼平台模型
@@ -60,7 +59,7 @@ config = {
 
 vn = MyVanna(config=config)
 
-vn.connect_to_sqlite(r'C:\Tiigee\git_repositories\vanna\tests\database\Chinook.sqlite')
+vn.connect_to_sqlite(r'./data/Chinook.sqlite')
 
 def test_vn_chroma():
     existing_training_data = vn.get_training_data()
