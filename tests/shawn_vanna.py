@@ -33,6 +33,8 @@ from vanna.chromadb.chromadb_vector import ChromaDB_VectorStore
 from vanna.openai.openai_chat import OpenAI_Chat
 from openai import OpenAI
 
+os.chdir(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
 api_key = "sk-10ac90a6267a46ad83df797d65520494"
 client = OpenAI(
     api_key=api_key,

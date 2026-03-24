@@ -1,4 +1,5 @@
 import os
+import sys
 
 from vanna.anthropic.anthropic_chat import Anthropic_Chat
 from vanna.cohere.cohere_chat import Cohere_Chat
@@ -27,7 +28,12 @@ from vanna.vannadb.vannadb_vector import VannaDB_VectorStore
 # SNOWFLAKE_PASSWORD = os.environ['SNOWFLAKE_PASSWORD']
 # AZURE_SEARCH_API_KEY = os.environ['AZURE_SEARCH_API_KEY']
 
-os.chdir(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+if sys.platform.startswith("linux"):
+    chromadb_path=r"/root/app_files/TalkToData/data/chroma_db"
+    sqlite_path=r"/root/app_files/TalkToData/data/Chinook.sqlite"
+else:
+    chromadb_path=r'C:\Tiigee\git_repositories\TalkToData\data\chroma_db' 
+    sqlite_path=r'C:\Tiigee\git_repositories\TalkToData\data\Chinook.sqlite' 
 
 # current_working_dir = os.getcwd()
 # print("当前工作目录： ", current_working_dir)
@@ -63,7 +69,7 @@ class MyVanna(ChromaDB_VectorStore, QianWenAI_Chat):
         QianWenAI_Chat.__init__(self, config=config)
 
 config = {
-    "path": "./data/chroma_db", #向量数据库存储路径
+    "path": chromadb_path, #向量数据库存储路径
     "api_key": "sk-10ac90a6267a46ad83df797d65520494",
     "model": "qwen-plus",  # 阿里云百炼平台模型
     "options": {"temperature": 0.3}  # 控制生成随机性
@@ -71,7 +77,7 @@ config = {
 
 vn = MyVanna(config=config)
 
-vn.connect_to_sqlite(r'./data/Chinook.sqlite')
+vn.connect_to_sqlite(sqlite_path)
 
 def test_vn_chroma():
     existing_training_data = vn.get_training_data()
