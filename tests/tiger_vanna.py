@@ -34,6 +34,8 @@ from vanna.chromadb.chromadb_vector import ChromaDB_VectorStore
 
 from vanna.ollama import Ollama
 
+os.chdir(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
 class MyVanna(ChromaDB_VectorStore, Ollama):
     def __init__(self, config=None):
         ChromaDB_VectorStore.__init__(self, config=config)

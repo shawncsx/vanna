@@ -27,12 +27,13 @@ from vanna.vannadb.vannadb_vector import VannaDB_VectorStore
 # SNOWFLAKE_PASSWORD = os.environ['SNOWFLAKE_PASSWORD']
 # AZURE_SEARCH_API_KEY = os.environ['AZURE_SEARCH_API_KEY']
 
+os.chdir(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
 # current_working_dir = os.getcwd()
 # print("当前工作目录： ", current_working_dir)
 
 # script_dir1 = os.path.dirname(os.path.abspath(__file__))
 # print("当前py文件所在目录1： ", script_dir1)
-
 
 # script_dir2 = os.path.dirname(os.path.realpath(__file__))
 # print("当前py文件所在目录2： ", script_dir2)
